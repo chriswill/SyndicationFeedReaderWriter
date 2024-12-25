@@ -24,6 +24,12 @@ steps:
       feedsToUse: "select"
       vstsFeed: "7a124f36-f58f-4fba-83fa-320bd1c605a7"
 
+  - task: VersionDotNetCoreAssemblies@2
+    displayName: "Update version"
+    inputs:
+      AddDefault: true
+      VersionRegex: '\d+\.\d+\.\d+'
+
   - task: DotNetCoreCLI@2
     displayName: "Build"
     inputs:
