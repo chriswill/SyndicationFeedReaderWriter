@@ -18,12 +18,18 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:    
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/Microsoft.SyndicationFeed.ReaderWriter.csproj'
+    command: 'pack'    
+    projects: 'src/Microsoft.SyndicationFeed.ReaderWriter.csproj'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '7a124f36-f58f-4fba-83fa-320bd1c605a7'
