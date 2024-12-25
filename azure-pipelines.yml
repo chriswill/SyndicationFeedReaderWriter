@@ -38,7 +38,7 @@ steps:
       projects: "src/Microsoft.SyndicationFeed.ReaderWriter.csproj"
 
   - task: PublishBuildArtifacts@1
-    displayName: "Publish Artofacts"
+    displayName: "Publish Artifacts"
     inputs:
       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
       ArtifactName: "drop"
