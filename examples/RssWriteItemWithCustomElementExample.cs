@@ -7,6 +7,7 @@ using Microsoft.SyndicationFeed.Rss;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -30,7 +31,7 @@ class RssWriteItemWithCustomElement
 
             var formatter = new RssFormatter(attributes, xmlWriter.Settings);
             var writer = new RssFeedWriter(xmlWriter, attributes, formatter);
-              
+
             // Create item
             var item = new SyndicationItem()
             {
@@ -59,7 +60,7 @@ class RssWriteItemWithCustomElement
 
         Console.WriteLine(sw.ToString());
     }
-    
+
     class StringWriterWithEncoding : StringWriter
     {
         private readonly Encoding _encoding;
@@ -69,7 +70,8 @@ class RssWriteItemWithCustomElement
             this._encoding = encoding;
         }
 
-        public override Encoding Encoding {
+        public override Encoding Encoding
+        {
             get { return _encoding; }
         }
     }

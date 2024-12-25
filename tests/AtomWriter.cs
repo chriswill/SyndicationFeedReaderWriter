@@ -224,7 +224,7 @@ namespace Microsoft.SyndicationFeed.Tests.Atom
 
             using (var xmlWriter = XmlWriter.Create(sw))
             {
-                var writer = new AtomFeedWriter(xmlWriter, 
+                var writer = new AtomFeedWriter(xmlWriter,
                                                 new ISyndicationAttribute[] { new SyndicationAttribute("xmlns:atom", "http://www.w3.org/2005/Atom") });
 
                 await writer.WriteTitle(title);
@@ -278,7 +278,9 @@ namespace Microsoft.SyndicationFeed.Tests.Atom
             }
 
             string res = sw.ToString();
-            Assert.True(res.Contains($"<atom:entry><atom:id>{entry.Id}</atom:id><atom:title>{entry.Title}</atom:title><atom:updated>{entry.LastUpdated.ToRfc3339()}</atom:updated><atom:author><atom:name>{author.Name}</atom:name><atom:email>{author.Email}</atom:email></atom:author><atom:content>{entry.Description}</atom:content></atom:entry>"));
+            Assert.Contains(
+                $"<atom:entry><atom:id>{entry.Id}</atom:id><atom:title>{entry.Title}</atom:title><atom:updated>{entry.LastUpdated.ToRfc3339()}</atom:updated><atom:author><atom:name>{author.Name}</atom:name><atom:email>{author.Email}</atom:email></atom:author><atom:content>{entry.Description}</atom:content></atom:entry>",
+                res);
         }
 
         [Fact]
@@ -361,7 +363,8 @@ namespace Microsoft.SyndicationFeed.Tests.Atom
             this._encoding = encoding;
         }
 
-        public override Encoding Encoding {
+        public override Encoding Encoding
+        {
             get { return _encoding; }
         }
     }
